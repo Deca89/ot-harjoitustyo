@@ -15,8 +15,12 @@ Sovellukseen lisätään alusta lähtien yksilölliset käyttäjät. Kaikilla k�
 Tarkempaa luonnosta kun saan vastauksia tähän. 
 Perusajatuksena
 
-- käyttäjä voi lisätä materiaalia eri päätaulukoihin (kaavoja/määritelmiä).
-- käyttäjä voi lukea lisättyä materiaalia
-- käyttäjä voi suorittaa lisätystä materiaalista/päätaulukoista luotuja testejä
+- käyttäjä voi lisätä materiaalia eri päätaulukoihin (kaavoja/määritelmiä). Tehty määritelmien kohdalta. Kaavojen kohdalta halutaan hieman erilaista toiminnallisuutta - oma taulukko tulossa.
+
+- käyttäjä voi lukea lisättyä materiaalia. Tehty
+
+- käyttäjä voi suorittaa lisätystä materiaalista/päätaulukoista luotuja testejä. Tavoitteena 15.4 mennessä
+
 - käyttäjän tekemistä testeistä talletetaan tulokset
+
 - käyttäjä voi tarkastella sekä omia tuloksiaan tarkemmin, että näkee kaikkien käyttäjien max testituloksista tehdyn keskiarvon.

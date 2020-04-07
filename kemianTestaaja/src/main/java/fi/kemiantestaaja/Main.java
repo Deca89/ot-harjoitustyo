@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.kemiantestaaja;
+package fi.kemiantestaaja;
 
+import fi.kemiantestaaja.ui.UserInterface;
 import java.sql.SQLException;
 
 /**
  *
  * @author Juuri
  */
-public class kemianTestaaja {
+public class Main {
 
-    public static void main(String[] args) throws SQLException {
-        Kayttoliittyma k = new Kayttoliittyma();
-        k.kaynnista();
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        UserInterface k = new UserInterface();
+        k.start();
     }
 }
+

@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.kemiantestaaja;
+package fi.kemiantestaaja.ui;
 
+import fi.kemiantestaaja.ui.UIDatabaseChooser;
 import fi.kemiantestaaja.ui.UserInterface;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -14,9 +17,9 @@ import java.sql.SQLException;
  */
 public class Main {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        UserInterface k = new UserInterface();
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
+        UIDatabaseChooser k = new UIDatabaseChooser();
         k.start();
+
     }
 }
-

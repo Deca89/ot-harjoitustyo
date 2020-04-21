@@ -6,10 +6,12 @@ Vielä keskeneräistä mitä kaikkia testausvälineitä halutaan käyttöön - j
 
 Molemmissa tapauksissa testaus olisi hieman eri muodossa.
 
-Selvitetty miten yhdistää sqlite javan Maveniin - muutaman mutkan kautta.
-Tällä hetkellä projekti sisältää toiminnallisuudet termien/selitysten lisäykseen&poistamiseen, sekä niiden tarkasteluun.
+-> Päädytty yleistämään rakennetta kokonaisuudessaan. Mahdollistetaan useampien kokonaisuuksien (kurssiem tms) lisäyksen erillisinä tiedostoina projektiin. Alussa valitaan minkä kurssin parissa suoritetaan toimenpiteitä.
 
-Ensi viikkoon (15.4) mennessä pitäisi olla lisättynä mahdollisuus lisätä kuvatiedostoja ja liittää niihin kohtia. Lisäksi jonkinmuotoisten testien generoiminen tietokantaan lisätystä materiaalista.
+Selvitetty miten yhdistää sqlite javan Maveniin - muutaman mutkan kautta.
+Tällä hetkellä projekti sisältää toiminnallisuudet termien/selitysten lisäykseen&poistamiseen, sekä niiden tarkasteluun. Lisäksi olemassa yksinkertainen testi termi/selitysten yhdistykseen. Ennen graaffisen käyttöliittymän käyttöönottoa ovat nämä hieman hankalan oloisia.
+
+Tärkeimpänä asiana nyt tehdä graafinen käyttöliittymä: mahdollistaisi helpomman kuvien lisäyksen ja mielekkyyttä materiaalin läpikäymiseen ja testien tekoon.
 
 Tämän lisäksi vielä lisättävää: 
 graafisen tietokannan lisääminen
@@ -19,5 +21,7 @@ testien tulosten talletus ja niiden tarkastelu
 ## Dokumentaatio
 
 [Työaikakirjanpito.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/Työaikakirjanpito.md)
+
 [Vaatimusmäärittely.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/Vaatimusmäärittely.md)
+
 [arkkitehtuuri.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)

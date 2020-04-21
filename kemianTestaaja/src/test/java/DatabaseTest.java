@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 
+import fi.kemiantestaaja.logics.CourseSelections;
 import fi.kemiantestaaja.logics.Database;
 import java.io.File;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,48 +28,36 @@ public class DatabaseTest {
     Database database;
     
     @Before
-    public void setUp() throws SQLException, ClassNotFoundException {
-        database = new Database();
+    public void setUp() throws SQLException, ClassNotFoundException{
+        CourseSelections c = new CourseSelections();
+        c.addCourse("test2");
+        database = new Database("test2");
+        
     }
-    
-    
-    
-    @Test
-    public void doesDatabaseExistWorksWithDatabase() {
-        File file = new File("chemistryTester.db");
-        assertEquals(file.exists(), database.doesDatabaseExist());
-    }
-    
-//    @Test
-//    public void canCreateDatabase() {
-//        
-//    }
-//    
+  
     @Test
     public void canAddToDatabase() throws SQLException {
-        PreparedStatement p1 = DriverManager.getConnection("jdbc:sqlite:chemistryTester.db").prepareStatement("SELECT COUNT(*) FROM Terms");
-        ResultSet r = p1.executeQuery();
+        int terms = this.database.termsInDatabase();
         
-        database.addTerm("test1", "test2");
+        this.database.addTerm("test11", "test111");
         
-        PreparedStatement p2 = DriverManager.getConnection("jdbc:sqlite:chemistryTester.db").prepareStatement("SELECT COUNT(*) FROM Terms");
-        ResultSet r2 = p2.executeQuery();
+        int terms2 = this.database.termsInDatabase();
         
-        assertTrue(r2.getInt("COUNT")>r.getInt("COUNT"));
+        assertTrue(terms2>terms);
     }
-//    
+    
     @Test
     public void canRemoveFromDatabase() throws SQLException {
-        PreparedStatement p1 = DriverManager.getConnection("jdbc:sqlite:chemistryTester.db").prepareStatement("SELECT COUNT(*) FROM Terms");
-        ResultSet r = p1.executeQuery();
+        this.database.addTerm("test11", "test111");
+        int terms = this.database.termsInDatabase();
         
-        database.removeTerm("test1");
+        this.database.removeTerm("test11");
         
-        PreparedStatement p2 = DriverManager.getConnection("jdbc:sqlite:chemistryTester.db").prepareStatement("SELECT COUNT(*) FROM Terms");
-        ResultSet r2 = p2.executeQuery();
+        int terms2 = this.database.termsInDatabase();
         
-        assertTrue(r2.getInt("COUNT")<r.getInt("COUNT"));
+        assertTrue(terms2<terms);
     }
     
     
+
 }

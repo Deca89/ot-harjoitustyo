@@ -31,8 +31,7 @@
                 <version>0.8.3</version>
                 <configuration>
                     <excludes>
-                        <exclude>fi.kemiantestaaja</exclude>
-                        <exclude>fi.kemiantestaaja.ui/*</exclude>
+                        <exclude>fi/kemiantestaaja/ui/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

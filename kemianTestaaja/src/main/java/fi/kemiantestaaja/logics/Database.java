@@ -22,40 +22,10 @@ public class Database {
     boolean databaseExists;
     Connection dM;
 
-    public Database() throws SQLException, ClassNotFoundException {
+    public Database(String course) throws SQLException, ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
-        File file = new File("chemistryTester.db");
-        if (file.exists()) {
-            this.databaseExists = true;
-            this.dM = DriverManager.getConnection("jdbc:sqlite:chemistryTester.db");
-        } else {
-            this.databaseExists = false;
-            this.dM = null;
-        }
-    }
-
-    public void addDatabase() throws SQLException, ClassNotFoundException {
-        Class.forName("org.sqlite.JDBC");
-
-        if (databaseExists) {
-            System.out.println("Tietokanta on jo olemassa\n");
-        } else {
-            Connection db = DriverManager.getConnection("jdbc:sqlite:chemistryTester.db");
-            this.databaseExists = true;
-            dM = db;
-
-            System.out.println("Tietokanta luotu\n");
-
-            dM.createStatement().execute("CREATE TABLE IF NOT EXISTS Terms(id INTEGER PRIMARY KEY, name TEXT UNIQUE NOT NULL)");
-            dM.createStatement().execute("CREATE TABLE IF NOT EXISTS Explanations(Term_id INTEGER REFERENCES Terms ON DELETE CASCADE, explanation TEXT UNIQUE NOT NULL)");
-        }
-    }
-
-    public boolean doesDatabaseExist() {
-        if (!databaseExists) {
-            System.out.println("\nTietokantaa ei ole vielä olemassa. \nYstävällisesti luo ensin tietokanta ja yritä sitten uudestaan.\n");
-        }
-        return databaseExists;
+        String check = course + ".db";
+        this.dM = DriverManager.getConnection("jdbc:sqlite:" + check);
     }
 
     public void addTerm(String term, String explanation) throws SQLException {
@@ -107,12 +77,23 @@ public class Database {
         }
 
     }
-    
+
+    public void createExam() throws SQLException {
+
+    }
+
+    public int termsInDatabase() throws SQLException {
+        PreparedStatement p1 = dM.prepareStatement("SELECT Count(*) AS C FROM Terms");
+        ResultSet r = p1.executeQuery();
+
+        return r.getInt("C");
+    }
+
     public void printTermsAndExplanations() throws SQLException {
         PreparedStatement p1 = dM.prepareStatement("SELECT T.name, E.explanation FROM Terms T, Explanations E WHERE T.id=E.Term_id");
         ResultSet r = p1.executeQuery();
         ResultSetMetaData rmd = r.getMetaData();
-        
+
         while (r.next()) {
             for (int i = 1; i < 3; i++) {
                 System.out.println(r.getString(i));

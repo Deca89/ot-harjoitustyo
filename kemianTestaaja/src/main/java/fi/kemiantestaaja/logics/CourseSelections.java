@@ -22,11 +22,20 @@ import java.util.stream.Stream;
  * @author Juuri
  */
 public class CourseSelections {
-    
+    /**
+     * Sisältää metodeja, joilla käsitellään yleisellä tasolla ohjelman juurikansiossa olevia kursseja/tietokantoja.
+     */
     public CourseSelections() {
         
     }
-    
+    /**
+     * Metodi lisää uuden tietokanta tiedoston 
+     * @param course Tehtävän tiedoston nimi
+     * @return boolean true: tietokannan luonti onnistui
+     * false: tietokannan luonti epäonnistui
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public Boolean addCourse(String course) throws SQLException, ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
         String check = course + ".db";
@@ -42,7 +51,11 @@ public class CourseSelections {
         }
         return true;
     }
-    
+    /**
+     * Metodi palauttaa listan kaikista projektin pääkansiossa olevista "kursseista", eli luoduista tietokannoista.
+     * @return lista kursseista.
+     * @throws IOException 
+     */
     public List<String> listCourses() throws IOException {
         Stream<Path> curDirFiles = Files.walk(Paths.get("."));
         
@@ -51,7 +64,12 @@ public class CourseSelections {
         
         return courses;
     }
-    
+    /**
+     * Metodi poistaa tiedoston/kurssin.
+     * @param course poistettavan tiedoston nimi
+     * @return boolean true: tiedosto poistettu false: tiedostoa ei poistettu (tarkoituksena se, ettei kyseistä tiedostoa ollutkaan olemassa)
+     * @throws ClassNotFoundException 
+     */
     public Boolean deleteCourse(String course) throws ClassNotFoundException {
         if (doesCourseExist(course)) {
             String check = course + ".db";
@@ -62,6 +80,12 @@ public class CourseSelections {
         return false;
     }
     
+    /**
+     * Metodi tarkistaa onko kyseinen kurssi/tiedosto olemassa
+     * @param course tarkistettavan tiedoston nimi
+     * @return boolean true: tiedosto on olemassa false: tiedostoa ei ole olemassa
+     * @throws ClassNotFoundException 
+     */
     public boolean doesCourseExist(String course) throws ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
         String check = course + ".db";

@@ -26,4 +26,4 @@ testien tulosten talletus ja niiden tarkastelu
 
 [arkkitehtuuri.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
-[kayttoohje.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md
+[kayttoohje.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)

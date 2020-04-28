@@ -16,7 +16,8 @@ Tai avaamalla tiedosto
 
 Ohjelma avautuu hallintavalikkoon näkymään
 
-<img src="https://github.com/Deca89/ot-harjoitustyo/tree/viikko6/dokumentaatio/kuvat/hallintavalikko.png" width="400">
+
+![hallintavalikko.png](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/hallintavalikko.png)
 
 Klikkaamalla Palaa valikkoon- nappia päästään aina takaisin valikkoon.
 
@@ -24,7 +25,7 @@ Klikkaamalla Palaa valikkoon- nappia päästään aina takaisin valikkoon.
 
 Tästä voidaan luoda uusi kurssi/tietokanta klikkaamalla Luo kurssi- nappia.
 
-<img src="https://github.com/Deca89/ot-harjoitustyo/tree/viikko6/dokumentaatio/kuvat/luokurssi.png" width="400">
+![luokurssi.png](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/luokurssi.png)
 
 Valikosta kirjoitetaan tekstiruutuun kurssin nimi ja klikataan Luo kurssi- nappia.
 
@@ -32,7 +33,7 @@ Valikosta kirjoitetaan tekstiruutuun kurssin nimi ja klikataan Luo kurssi- nappi
 
 Suoritettava kurssi voidaan valita klikkaamalla Valitse olemassa oleva kurssi- nappia.
 
-<img src="https://github.com/Deca89/ot-harjoitustyo/tree/viikko6/dokumentaatio/kuvat/valitsekurssi.png" width="400">
+![valitsekurssi.png](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/valitsekurssi.png)
 
 Kurssi valitaan klikkaamalla nappia, jossa on kurssin nimi.
 
@@ -40,7 +41,7 @@ Kurssi valitaan klikkaamalla nappia, jossa on kurssin nimi.
 
 Kurssi voidaan poistaa klikkaamalla Poista kurssi- nappia.
 
-<img src="https://github.com/Deca89/ot-harjoitustyo/tree/viikko6/dokumentaatio/kuvat/poistakurssi.png" width="400">
+![poistakurssi.png](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/poistakurssi.png)
 
 Kurssi poistetaan klikkaamalla nappia, jossa on poistettavan kurssin nimi.
 

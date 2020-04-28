@@ -49,7 +49,7 @@ Kurssi poistetaan klikkaamalla nappia, jossa on poistettavan kurssin nimi.
 
 Kurssin valitsemisen jälkeen avautuu uusi ikkuna/kurssivalikko.
 
-<img src="https://github.com/Deca89/ot-harjoitustyo/tree/viikko6/dokumentaatio/kuvat/kurssivalikko.png" width="400">
+![kurssivalikko.png](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/kurssivalikko.png)>
 
 Kurssivalikon valikkoon päästää jälleen aina takaisin klikkaamalla Palaa valikkoon- nappia.
 

@@ -29,11 +29,16 @@ public class CourseSelectionsTest {
 
     @Test
     public void canAddCourse() throws SQLException, ClassNotFoundException {
-
         c.addCourse("test11");
         File f = new File("test11.db");
         assertTrue(f.exists());
-
+    }
+    
+    @Test
+    public void canOnlyAddCourseOnce() throws SQLException, ClassNotFoundException {
+        c.addCourse("test11");
+        Boolean canAddAgain = c.addCourse("test11");
+        assertTrue(!canAddAgain);
     }
     
     @Test
@@ -44,4 +49,14 @@ public class CourseSelectionsTest {
         File f = new File("test11.db");
         assertTrue(!f.exists());
     }
+    
+    @Test
+    public void canCheckIfCourseExists() throws SQLException, ClassNotFoundException {
+        c.addCourse("test11");
+        
+        Boolean checkWorks = c.doesCourseExist("test11");
+        
+        assertTrue(checkWorks);
+    }
+    
 }

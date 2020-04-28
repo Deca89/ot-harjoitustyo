@@ -5,6 +5,7 @@
  */
 package fi.kemiantestaaja.ui;
 
+import fi.kemiantestaaja.logics.CourseSelections;
 import fi.kemiantestaaja.ui.UIDatabaseChooser;
 import fi.kemiantestaaja.ui.UserInterface;
 import java.io.File;
@@ -18,8 +19,11 @@ import java.sql.SQLException;
 public class Main {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
-        UIDatabaseChooser k = new UIDatabaseChooser();
-        k.start();
+//        UIDatabaseChooser k = new UIDatabaseChooser();
+//        CourseSelections courses = new CourseSelections();
+//        k.start();
+        
+        UIDatabaseChooserGraphic.main(args);
 
     }
 }

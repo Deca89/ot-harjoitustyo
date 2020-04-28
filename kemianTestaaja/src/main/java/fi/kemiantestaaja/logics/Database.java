@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,58 +29,49 @@ public class Database {
         this.dM = DriverManager.getConnection("jdbc:sqlite:" + check);
     }
 
-    public void addTerm(String term, String explanation) throws SQLException {
+    public int addTerm(String term, String explanation) throws SQLException {
+        int toReturn = 0;
         PreparedStatement p = dM.prepareStatement("INSERT INTO Terms(name) VALUES (?)");
         p.setString(1, term);
         try {
             p.executeUpdate();
-            System.out.println(term + " lisätty termeihin\n");
         } catch (SQLException e) {
-            System.out.println("Termi on jo lisätty tietokantaan. Yritä uudelleen.\n");
-            return;
+            return 1;
         }
-
         PreparedStatement p2 = dM.prepareStatement("SELECT id FROM Terms WHERE name=?");
         p2.setString(1, term);
         ResultSet r = p2.executeQuery();
-
         PreparedStatement p3 = dM.prepareStatement("INSERT INTO Explanations(Term_id, explanation) VALUES (?, ?)");
         p3.setString(2, explanation);
         p3.setInt(1, r.getInt("id"));
 
         try {
             p3.executeUpdate();
-            System.out.println("Selitys lisätty myös.\n");
+            return 2;
         } catch (SQLException e) {
-            System.out.println("Selityksen lisäyksessä sattui virhe. En tiedä vielä miksi.\n");
+            return 3;
         }
 
     }
 
-    public void removeTerm(String term) throws SQLException {
+    public Integer removeTerm(String term) throws SQLException {
         PreparedStatement p1 = dM.prepareStatement("SELECT id FROM Terms WHERE name=?");
         p1.setString(1, term);
         ResultSet r = p1.executeQuery();
         try {
             Integer termID = r.getInt("id");
         } catch (Exception e) {
-            System.out.println("Termiä ei ole tietokannassa - sitä ei siis voida poistaa");
-            return;
+            return 1;
         }
 
         PreparedStatement p2 = dM.prepareStatement("DELETE FROM Terms WHERE id=?");
         p2.setInt(1, r.getInt("id"));
         try {
             p2.executeUpdate();
-            System.out.println(term + " poistettu termeistä\n");
+            return 2;
         } catch (SQLException e) {
-            System.out.println("Termin poistaminen epäonnistui.\n");
+            return 3;
         }
-
-    }
-
-    public void createExam() throws SQLException {
-
     }
 
     public int termsInDatabase() throws SQLException {
@@ -88,18 +80,33 @@ public class Database {
 
         return r.getInt("C");
     }
+    
+    public ArrayList<String> getTerms() throws SQLException {
+        ArrayList<String> toReturn = new ArrayList<>();
+        PreparedStatement p1 = dM.prepareStatement("SELECT T.name FROM Terms T");
+        ResultSet r = p1.executeQuery();
+        ResultSetMetaData rmd = r.getMetaData();
+        
+        while (r.next()) {
+            toReturn.add(r.getString(1));
+        }
+        
+        return toReturn;
+    }
 
-    public void printTermsAndExplanations() throws SQLException {
+    public ArrayList<String> printTermsAndExplanations() throws SQLException {
+        ArrayList<String> toReturn = new ArrayList<>();
         PreparedStatement p1 = dM.prepareStatement("SELECT T.name, E.explanation FROM Terms T, Explanations E WHERE T.id=E.Term_id");
         ResultSet r = p1.executeQuery();
         ResultSetMetaData rmd = r.getMetaData();
 
         while (r.next()) {
-            for (int i = 1; i < 3; i++) {
-                System.out.println(r.getString(i));
-            }
-            System.out.println("");
+            toReturn.add(r.getString(1));
+            toReturn.add(r.getString(2));
+            toReturn.add(" ");
         }
+        
+        return toReturn;
     }
 
 }

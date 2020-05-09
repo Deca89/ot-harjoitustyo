@@ -5,8 +5,8 @@
  */
 package fi.kemiantestaaja.ui;
 
-import fi.kemiantestaaja.logics.Database;
-import fi.kemiantestaaja.logics.Exam;
+import fi.kemiantestaaja.domain.Database;
+import fi.kemiantestaaja.domain.Exam;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class UserInterface {
             String term = scanner.nextLine();
             this.database.removeTerm(term);
         } else if (input.equals("3")) {
-            this.database.printTermsAndExplanations();
+            this.database.getTermsAndExplanations();
         } else if (input.equals("4")) {
             exam();
         } else if (input.equals("valikko")) {
@@ -70,7 +70,7 @@ public class UserInterface {
     }
     
     public void exam() throws SQLException, ClassNotFoundException {
-        int questions = this.database.termsInDatabase();
+        int questions = this.database.numberOfTerms();
         System.out.print("Kurssi sisältää " + questions + " termiä. Kuinka monta niistä haluat tenttiin? ");
         String amount = scanner.nextLine();
         int amountValue = Integer.valueOf(amount);

@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-import fi.kemiantestaaja.logics.CourseSelections;
-import fi.kemiantestaaja.logics.Database;
+import fi.kemiantestaaja.domain.CourseSelections;
+import fi.kemiantestaaja.domain.Database;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;

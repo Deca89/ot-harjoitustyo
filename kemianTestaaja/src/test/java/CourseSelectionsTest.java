@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import fi.kemiantestaaja.logics.CourseSelections;
+import fi.kemiantestaaja.domain.CourseSelections;
 import java.io.File;
 import java.sql.SQLException;
 import org.junit.After;

@@ -5,7 +5,7 @@
  */
 package fi.kemiantestaaja.ui;
 
-import fi.kemiantestaaja.logics.CourseSelections;
+import fi.kemiantestaaja.domain.CourseSelections;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;

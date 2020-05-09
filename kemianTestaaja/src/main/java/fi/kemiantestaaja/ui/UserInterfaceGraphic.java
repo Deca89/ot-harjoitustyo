@@ -5,7 +5,7 @@
  */
 package fi.kemiantestaaja.ui;
 
-import fi.kemiantestaaja.logics.Database;
+import fi.kemiantestaaja.domain.Database;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -71,69 +71,52 @@ public class UserInterfaceGraphic extends Application {
         addTerm.getChildren().add(atInsertTerm);
         addTerm.getChildren().add(atMessage);
         atInsertTerm.setOnAction((event) -> {
-            try {
-                int added = databaseCourse.addTerm(atTerm.getText(), atExplanation.getText());
-                if (added == 1) {
-                    atMessage.setText("Termi jo tietokannassa");
-                } else if (added == 2) {
-                    atMessage.setText("Termi ja selitys lisätty tietokantaan");
-                } else {
-                    atMessage.setText("Selityksen lisäyksessä tapahtui jotakin omituista");
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(UserInterfaceGraphic.class.getName()).log(Level.SEVERE, null, ex);
+            boolean added = databaseCourse.addTerm(atTerm.getText(), atExplanation.getText());
+            if (!added) {
+                atMessage.setText("Termi jo tietokannassa");
+            } else {
+                atMessage.setText("Termi lisätty tietokantaan");
             }
         });
         addTerm.setSpacing(10);
 
         oRemoveTerm.setOnAction((event) -> {
-            try {
-                VBox removeTerm = new VBox();
-                Label rtMessage = new Label(" ");
-                removeTerm.getChildren().add(rtMessage);
-                layout.setCenter(removeTerm);
-                ArrayList<String> listOfTerms = databaseCourse.getTerms();
-                listOfTerms.forEach((term) -> {
-                    final Button thTerm = new Button(term);
-                    removeTerm.getChildren().add(thTerm);
-                    thTerm.setOnAction((eventt) -> {
-                        try {
-                            String termToDelete = thTerm.getText();
-                            int wasDeleted = databaseCourse.removeTerm(termToDelete);
-                            if (wasDeleted == 2) {
-                                rtMessage.setText("Termi poistettu");
-                            } else if (wasDeleted == 1) {
-                                rtMessage.setText("Termiä ei ole tietokannassa");
-                            } else {
-                                rtMessage.setText("Termin poisto epäonnistui");
-                            }
-                        } catch (SQLException ex) {
-                            Logger.getLogger(UserInterfaceGraphic.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    });
+            VBox removeTerm = new VBox();
+            Label rtMessage = new Label(" ");
+            removeTerm.getChildren().add(rtMessage);
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(removeTerm);
+            layout.setCenter(scrollPane);
+            ArrayList<String> listOfTerms = databaseCourse.getTerms();
+            listOfTerms.forEach((term) -> {
+                final Button thTerm = new Button(term);
+                removeTerm.getChildren().add(thTerm);
+                thTerm.setOnAction((eventt) -> {
+                    String termToDelete = thTerm.getText();
+                    boolean wasDeleted = databaseCourse.removeTerm(termToDelete);
+                    if (wasDeleted) {
+                        rtMessage.setText("Termi poistettu");
+                        oRemoveTerm.fire();
+                    } else {
+                        rtMessage.setText("Termiä ei ole tietokannassa");
+                    }
                 });
-            } catch (SQLException ex) {
-                Logger.getLogger(UserInterfaceGraphic.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            });
+            removeTerm.setSpacing(10);
         });
-        
+
         oReadThroughTerms.setOnAction((event) -> {
-            try {
-                VBox readThroughTerms = new VBox();
-                readThroughTerms.setSpacing(10);
-                ScrollPane scrollPane = new ScrollPane();
-                scrollPane.setContent(readThroughTerms);
-                layout.setCenter(scrollPane);
-                ArrayList<String> list = databaseCourse.printTermsAndExplanations();
-                list.forEach((term) -> {
-                    final Label thTerm = new Label(term);
-                    readThroughTerms.getChildren().add(thTerm);
-                });
-            } catch (SQLException ex) {
-                Logger.getLogger(UserInterfaceGraphic.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            VBox readThroughTerms = new VBox();
+            readThroughTerms.setSpacing(10);
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(readThroughTerms);
+            layout.setCenter(scrollPane);
+            ArrayList<String> list = databaseCourse.getTermsAndExplanations();
+            list.forEach((term) -> {
+                final Label thTerm = new Label(term);
+                readThroughTerms.getChildren().add(thTerm);
+            });
         });
-        
 
         oAddTerm.setOnAction((event) -> layout.setCenter(addTerm));
         returnToOptions.setOnAction((event) -> layout.setCenter(options));
@@ -146,6 +129,7 @@ public class UserInterfaceGraphic extends Application {
     }
 
     @Override
+
     public void start(Stage arg0) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

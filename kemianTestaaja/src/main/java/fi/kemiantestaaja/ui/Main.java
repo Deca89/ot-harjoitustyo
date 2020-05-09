@@ -5,7 +5,7 @@
  */
 package fi.kemiantestaaja.ui;
 
-import fi.kemiantestaaja.logics.CourseSelections;
+import fi.kemiantestaaja.domain.CourseSelections;
 import fi.kemiantestaaja.ui.UIDatabaseChooser;
 import fi.kemiantestaaja.ui.UserInterface;
 import java.io.File;

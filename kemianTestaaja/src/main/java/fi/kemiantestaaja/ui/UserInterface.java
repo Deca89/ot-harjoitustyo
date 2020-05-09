@@ -50,7 +50,7 @@ public class UserInterface {
         } else if (input.equals("3")) {
             this.database.getTermsAndExplanations();
         } else if (input.equals("4")) {
-            exam();
+            
         } else if (input.equals("valikko")) {
             printOptions();
         } else if (input.equals("lopeta")) {
@@ -69,21 +69,7 @@ public class UserInterface {
         System.out.println("valikko: Tulosta valikko\n");
     }
     
-    public void exam() throws SQLException, ClassNotFoundException {
-        int questions = this.database.numberOfTerms();
-        System.out.print("Kurssi sisältää " + questions + " termiä. Kuinka monta niistä haluat tenttiin? ");
-        String amount = scanner.nextLine();
-        int amountValue = Integer.valueOf(amount);
-        Exam toDo = new Exam(this.currentCourse, amountValue, questions);
-        List<Integer> correctAnswers = toDo.createExam();
-        System.out.println("\n Syötä termejä vastaavien selitysten numerot yksi kerrallaan.\n");
-        ArrayList<Integer> answers = new ArrayList<>();
-        for (int i = 0; i < amountValue; i++) {
-            String answer = scanner.nextLine();
-            answers.add(correctAnswers.get(Integer.valueOf(answer)-1));
-        }
-        toDo.checkExam(answers);
-    }
+
     
     
 }

@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -31,6 +32,7 @@ import javafx.stage.Stage;
 public class UserInterfaceGraphic extends Application {
 
     public void start(Stage window, String course) throws Exception {
+        //Basic setup
         BorderPane layout = new BorderPane();
         Database databaseCourse = new Database(course);
         Label welcomeToCourse = new Label("Tervetuloa " + course + ":in pariin");
@@ -41,6 +43,7 @@ public class UserInterfaceGraphic extends Application {
         layout.setAlignment(welcomeToCourse, Pos.CENTER);
         layout.setAlignment(returnToOptions, Pos.CENTER);
 
+        //Creating options to choose from
         VBox options = new VBox();
         Button oAddTerm = new Button("Lisää termi/selitys");
         oAddTerm.setPrefSize(400, 10);
@@ -56,8 +59,11 @@ public class UserInterfaceGraphic extends Application {
         options.getChildren().add(oCreateExam);
         layout.setCenter(options);
         options.setSpacing(10);
+        returnToOptions.setOnAction((event) -> layout.setCenter(options));
 
+        //Adding terms into the database
         VBox addTerm = new VBox();
+        oAddTerm.setOnAction((event) -> layout.setCenter(addTerm));
         Label atTermToAdd = new Label("Termi:");
         TextField atTerm = new TextField();
         Label atExplanationToAdd = new Label("Selitys:");
@@ -80,6 +86,7 @@ public class UserInterfaceGraphic extends Application {
         });
         addTerm.setSpacing(10);
 
+        //Removing terms from the database
         oRemoveTerm.setOnAction((event) -> {
             VBox removeTerm = new VBox();
             Label rtMessage = new Label(" ");
@@ -105,6 +112,7 @@ public class UserInterfaceGraphic extends Application {
             removeTerm.setSpacing(10);
         });
 
+        //Listing the terms/explanations in database
         oReadThroughTerms.setOnAction((event) -> {
             VBox readThroughTerms = new VBox();
             readThroughTerms.setSpacing(10);
@@ -118,8 +126,17 @@ public class UserInterfaceGraphic extends Application {
             });
         });
 
-        oAddTerm.setOnAction((event) -> layout.setCenter(addTerm));
-        returnToOptions.setOnAction((event) -> layout.setCenter(options));
+        oCreateExam.setOnAction((event) -> {
+            UITakeExam UIExam = new UITakeExam();
+                    Stage newStage = new Stage();
+                    try {
+                        UIExam.start(newStage, databaseCourse);
+                    } catch (Exception ex) {
+                        Logger.getLogger(UIDatabaseChooserGraphic.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        });
+        
+        
 
         layout.setPrefSize(500, 600);
         Scene primaryScene = new Scene(layout);

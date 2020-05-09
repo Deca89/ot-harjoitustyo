@@ -20,12 +20,13 @@ import java.util.logging.Logger;
  * @author Juuri
  */
 public class DatabaseDAO {
+
     String course;
-    
+
     public DatabaseDAO(String course) {
         this.course = course;
     }
-    
+
     public Connection createConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -36,7 +37,7 @@ public class DatabaseDAO {
             return null;
         }
     }
-    
+
     public boolean addTerm(String term, String explanation) {
         try {
             int toReturn = 0;
@@ -51,7 +52,7 @@ public class DatabaseDAO {
             return false;
         }
     }
-    
+
     public boolean removeTerm(String term) {
         try {
             Connection dM = createConnection();
@@ -59,7 +60,7 @@ public class DatabaseDAO {
             p1.setString(1, term);
             ResultSet r = p1.executeQuery();
             Integer termID = r.getInt("id");
-            
+
             PreparedStatement p2 = dM.prepareStatement("DELETE FROM Terms WHERE id=?");
             p2.setInt(1, r.getInt("id"));
             p2.executeUpdate();
@@ -69,15 +70,15 @@ public class DatabaseDAO {
             return false;
         }
     }
-    
-    public ArrayList<String> listTerms(){
+
+    public ArrayList<String> listTerms() {
         try {
             ArrayList<String> toReturn = new ArrayList<>();
             Connection dM = createConnection();
             PreparedStatement p1 = dM.prepareStatement("SELECT T.name FROM Terms T");
             ResultSet r = p1.executeQuery();
             ResultSetMetaData rmd = r.getMetaData();
-            
+
             while (r.next()) {
                 toReturn.add(r.getString(1));
             }
@@ -87,7 +88,7 @@ public class DatabaseDAO {
             return null;
         }
     }
-    
+
     public ArrayList<String> listTermsAndExplanations() {
         try {
             ArrayList<String> toReturn = new ArrayList<>();
@@ -95,7 +96,7 @@ public class DatabaseDAO {
             PreparedStatement p1 = dM.prepareStatement("SELECT name, explanation FROM Terms");
             ResultSet r = p1.executeQuery();
             ResultSetMetaData rmd = r.getMetaData();
-            
+
             while (r.next()) {
                 toReturn.add(r.getString(1));
                 toReturn.add(r.getString(2));
@@ -107,17 +108,35 @@ public class DatabaseDAO {
             return null;
         }
     }
-    
-    public int numberOfTerms(){
+
+    public int numberOfTerms() {
         try {
             Connection dM = createConnection();
             PreparedStatement p1 = dM.prepareStatement("SELECT Count(*) AS C FROM Terms");
             ResultSet r = p1.executeQuery();
-            
+
             return r.getInt("C");
         } catch (SQLException ex) {
             return -1;
         }
     }
-    
+
+    public ArrayList<String> listTermsOrExplanations(ArrayList<Integer> wantedWords, String wanted) {
+        ArrayList<String> wantedNames = new ArrayList<>();
+        
+        for (int i = 0; i < wantedWords.size(); i++) {
+            try {
+                Connection dM = createConnection();
+                PreparedStatement p = dM.prepareStatement("SELECT " + wanted + " FROM Terms WHERE id=?");
+                p.setInt(1, wantedWords.get(i));
+                ResultSet r = p.executeQuery();
+                wantedNames.add(r.getString(wanted));
+            } catch (SQLException ex) {
+                return null;
+            }
+        }
+        
+        return wantedNames;
+    }
+
 }

@@ -6,7 +6,9 @@ Lataa tiedosto [kemianTestaaja-1.0-SNAPSHOT.jar](https://github.com/Deca89/ot-ha
 
 Ohjelman olettaa, ettei sen käynnistyshakemistossa ole ohjelmaan kuulumattomia tietokantatiedostoja. Tai ettei niitä ainakaan yritetä avata ohjelmalla.
 
-Ohjelman testi olettaa, ettei testejä varten tehtyjä tiedostoja käytetä.
+Ohjelman testi olettaa, ettei testejä varten tehtyjä tiedostoja käytetä muuhun.
+
+Testienajo olettaa, että tiedosto test111.db löytyy. Mikäli tiedostoa ei löydy, epäonnistuu tiedostonpoisto testi ensimmäisellä testien ajokerralla. Toisella/seuraavilla ei väliä vaikka tiedostoa ei alunperin olisi ollut.
 
 ## Ohjelman käynnistäminen
 

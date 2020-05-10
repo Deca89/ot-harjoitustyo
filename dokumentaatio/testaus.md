@@ -1,12 +1,12 @@
 # Testausdokumentti
 
-Ohjelmaa on testattu sekä automatisoiduin yksikkö- ja integraatiotestein JUnitilla sekä manuaalisesti tapahtunein järjestelmätason testein.
+Ohjelmaa on testattu automatisoiduilla testeillä JUnitilla ja manuaalisesti  järjestelmätason testeillä.
 
 ## Yksikkö- ja integraatiotestaus
 
 ### Sovelluslogiikka
 
-Automatisoitujen testit on souritettu sovelluslogiikkaa testaavien, eli pakkauksen [kemiantestaaja.domain](https://github.com/Deca89/ot-harjoitustyo/tree/master/kemianTestaaja/src/main/java/fi/kemiantestaaja/domain) luokkia testaavat integraatiotestit [CourseSelectionsTest](https://github.com/Deca89/ot-harjoitustyo/blob/master/kemianTestaaja/src/test/java/CourseSelectionsTest.java), [DatabaseTest](https://github.com/Deca89/ot-harjoitustyo/blob/master/kemianTestaaja/src/test/java/DatabaseTest.java) ja [ExamTest](https://github.com/Deca89/ot-harjoitustyo/blob/master/kemianTestaaja/src/test/java/ExamTest.java) joiden testitapaukset simuloivat eri käyttöliittymien avulla suoritettuja toiminnallisuuksia.
+Automatisoitujen testit on souritettu sovelluslogiikkaa testaavien, eli pakkauksen [kemiantestaaja.domain](https://github.com/Deca89/ot-harjoitustyo/tree/master/kemianTestaaja/src/main/java/fi/kemiantestaaja/domain) luokkia testaavat testit [CourseSelectionsTest](https://github.com/Deca89/ot-harjoitustyo/blob/master/kemianTestaaja/src/test/java/CourseSelectionsTest.java), [DatabaseTest](https://github.com/Deca89/ot-harjoitustyo/blob/master/kemianTestaaja/src/test/java/DatabaseTest.java) ja [ExamTest](https://github.com/Deca89/ot-harjoitustyo/blob/master/kemianTestaaja/src/test/java/ExamTest.java) joiden testitapaukset simuloivat eri käyttöliittymien avulla suoritettuja toiminnallisuuksia.
 
 ### DAO-luokat
 
@@ -26,14 +26,13 @@ Järjestelmätestaus on suoritettu manuaalisesti.
 
 ### Asennus ja konfigurointi
 
-Sovellus on haettu ja sitä on testattu sekä OSX- että Linux-ympäristössä [kayttoohje.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md) kuvaamalla tavalla.
+Sovellus on haettu ja sitä on testattu OSX- ja Linux-ympäristössä [kayttoohje.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md) tyyppisellä tavalla.
 
 
 ### Toiminnallisuudet
 
-Kaikki [Vaatimusmäärittely.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/Vaatimusmäärittely.md) ja käyttöohjeen listaamat toiminnallisuudet on käyty läpi. Toiminnallisuuksien yhteydessä on kokeiltu myös syöttää virheellisiä arvoja (kirjaimia numeroiden kohdalla, tyhjät arvot etc)
+Kaikki [Vaatimusmäärittely.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/Vaatimusmäärittely.md) ja käyttöohjeen listaamat toiminnallisuudet on tarkastettu. Tarkastusten yhteydessä on kokeiltu myös syöttää ongelmallisia arvoja (kirjaimia numeroiden kohdalla, tyhjät arvot etc)
 
 ## Sovellukseen jääneet laatuongelmat
 
-Sovellus ei anna tällä hetkellä järkeviä virheilmoituksia, seuraavissa tilanteissa
-- Ohjelmalla avattava tietokantatiedosto ei ole ohjelman standardien mukainen.
+Mikäli ohjelmalla avataan ohjelmalle epätyypillisiä tiedostoja, ei sovellus kykene generoimaan järkeviä virheilmoituksia.

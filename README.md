@@ -1,20 +1,32 @@
 # KemianTestaaja
 
-Aloitettu graafisen käyttöliittymän teko. Vielä lisätävä siihen testi ominaisuus, jota ei vielä ehditty lisämään. Tämän lisäksi korjattava arkkitehtuuri osiossa mainittuja virheitä.
+Sovelluksen avulla voidaan luoda erillisia tietokanta tiedostoja, joihin lisätään haluttua tietoa. Lisättyjä tietoja voidaan sovelluksessa tarkastella. Lisäksi sovelluksen avulla voidaan tehdä pieniä kokeita testaamaan lisätyn tiedon tuntemusta.
 
-Testi osi jostain syystä päättänyt vihata graafista liittymää - seonnut uusimpien muutosten myötä. Tätä pitää katsoa ensi viikoksi.
-
-Tämän lisäksi vielä lisättävää: 
-kirjautumisfunktio (koska tehdään vain paikallinen versio onko niin hyödyllinen?)
-kuvien lisäys tietokantaan/testeihin.
-testien tulosten talletus ja niiden tarkastelu
 
 ## Dokumentaatio
 
-[Työaikakirjanpito.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/Työaikakirjanpito.md)
+[Työaikakirjanpito](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/Työaikakirjanpito.md)
 
-[Vaatimusmäärittely.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/Vaatimusmäärittely.md)
+[Vaatimusmäärittely](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/Vaatimusmäärittely.md)
 
-[arkkitehtuuri.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+[Arkkitehtuurikuvaus](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
-[kayttoohje.md](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+[Käyttoohje](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
+[Testausdokumentti](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+
+## Releaset
+
+[Lopullinen](https://github.com/Deca89/ot-harjoitustyo/releases/tag/loppupalautus)
+
+## Komentorivitoiminnot
+
+Testit voidaan joko suorittaa Netbeans:in kautta, tai komennolla (mvn test)
+
+Testikattavuusraportti voidaan suorittaa Netbeans:issa Run Maven -> tests, tai komennolla (mvn jacoco:report)
+
+JavaDoc voidaan suorittaa NetBeans:issa Run Maven -> javadoc, tai  komennolla (mvn javadoc:javadoc)
+
+Tiedostoon määrittelemät tarkistukset voidaan suorittaa NetBeans:issa Run Maven -> checkstyle2, tai komennolla (mvn jxr:jxr checkstyle:checkstyle)
+
+Saadut tulokset löytyvät tiedostosta target/site/...

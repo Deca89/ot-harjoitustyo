@@ -22,7 +22,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- *UI kyseisen tietokannan hallintaa varten
+ * UI kyseisen tietokannan hallintaa varten
+ *
  * @author Juuri
  */
 public class UserInterfaceGraphic extends Application {
@@ -79,13 +80,13 @@ public class UserInterfaceGraphic extends Application {
                 atMessage.setText("Syöte ei voi olla tyhjä");
             } else {
                 boolean added = databaseCourse.addTerm(atTerm.getText(), atExplanation.getText());
-            if (!added) {
-                atMessage.setText("Termi jo tietokannassa");
-            } else {
-                atMessage.setText("Termi lisätty tietokantaan");
+                if (!added) {
+                    atMessage.setText("Termi jo tietokannassa");
+                } else {
+                    atMessage.setText("Termi lisätty tietokantaan");
+                }
             }
-            }
-            
+
         });
         addTerm.setSpacing(10);
 

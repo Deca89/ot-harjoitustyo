@@ -22,6 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
+ * UI testiä varten
  *
  * @author Juuri
  */
@@ -44,10 +45,6 @@ public class UITakeExam extends Application {
         HBox amountOfPics = new HBox();
         HBox amountOfTerms = new HBox();
         Button pEcreateExam = new Button("Luo testi");
-        Label aopPics = new Label("Kuvien määrä: ");
-        TextField aopPicsAmount = new TextField();
-        Label aopMaxPics = new Label("max X");
-        amountOfPics.getChildren().addAll(aopPics, aopPicsAmount, aopMaxPics);
         Label aopTerms = new Label("Termien määrä: ");
         TextField aopTermsAmount = new TextField();
         Label aopMaxTerms = new Label("max " + databaseCourse.numberOfTerms());
@@ -55,33 +52,51 @@ public class UITakeExam extends Application {
         Label aopMessage = new Label("");
         examFirstScene.getChildren().addAll(amountOfPics, amountOfTerms, pEcreateExam, aopMessage);
         scrollpane.setContent(examFirstScene);
+        returnToBeginning.setOnAction((event) -> scrollpane.setContent(examFirstScene));
 
         pEcreateExam.setOnAction((event) -> {
             VBox takeExam = new VBox();
-            int CEamountOfTerms = Integer.valueOf(aopTermsAmount.getText());
-            if (CEamountOfTerms > databaseCourse.numberOfTerms() | CEamountOfTerms < 1) {
+            takeExam.setSpacing(10);
+            if (aopTermsAmount.getText().equals("") | !aopTermsAmount.getText().matches("[0-9]*")) {
                 aopMessage.setText("Valitse luku 1 ja max lukumäärän väliltä");
             } else {
-                scrollpane.setContent(takeExam);
-                Exam exam = new Exam(CEamountOfTerms, databaseCourse);
-                exam.setTermNumbers();
-                ArrayList<String> examTerms = exam.getTerms();
-                ArrayList<String> examExplanations = exam.getExplanations();
-                
-                for (int i = 0; i < CEamountOfTerms; i++) {
-                    final HBox box = new HBox();
-                    final Label label = new Label((i+1) + ". " + examTerms.get(i) + "   ");
-                    final TextField textField = new TextField();
-                    final Label label1 = new Label(examExplanations.get(i));
-                    box.getChildren().addAll(label, textField, label1);
-                    takeExam.getChildren().add(box);
+                int cEamountOfTerms = Integer.valueOf(aopTermsAmount.getText());
+                if (cEamountOfTerms > databaseCourse.numberOfTerms() | cEamountOfTerms < 1) {
+                    aopMessage.setText("Valitse luku 1 ja max lukumäärän väliltä");
+                } else {
+                    scrollpane.setContent(takeExam);
+                    Exam exam = new Exam(cEamountOfTerms, databaseCourse);
+                    exam.setTermNumbers();
+                    ArrayList<String> examTerms = exam.getTerms();
+                    ArrayList<String> examExplanations = exam.getExplanations();
+                    ArrayList<TextField> givenAnswers = new ArrayList<>();
+
+                    for (int i = 0; i < cEamountOfTerms; i++) {
+                        final HBox box = new HBox();
+                        final Label label = new Label((i + 1) + ". " + examTerms.get(i) + "   ");
+                        final TextField textField = new TextField();
+                        final Label label1 = new Label(examExplanations.get(i));
+                        box.getChildren().addAll(label, textField, label1);
+                        takeExam.getChildren().add(box);
+                        givenAnswers.add(textField);
+                    }
+
+                    Button checkExam = new Button("Tarkista koe");
+                    Label results = new Label("");
+                    takeExam.getChildren().addAll(checkExam, results);
+                    ArrayList<Integer> answersToCheck = new ArrayList<>();
+                    checkExam.setOnAction((eventt) -> {
+                        for (TextField textField : givenAnswers) {
+                            answersToCheck.add(Integer.valueOf(textField.getText()));
+                        }
+                        int correctAnswers = exam.checkExam(answersToCheck);
+                        results.setText("Tulos: " + correctAnswers + "/" + cEamountOfTerms);
+                    });
                 }
             }
 
-            takeExam.setSpacing(10);
         });
 
-        
         layout.setPrefSize(700, 900);
         Scene primaryScene = new Scene(layout);
 

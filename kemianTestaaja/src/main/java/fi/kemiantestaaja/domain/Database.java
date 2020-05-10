@@ -6,7 +6,6 @@
 package fi.kemiantestaaja.domain;
 
 import fi.kemiantestaaja.dao.DatabaseDAO;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -15,19 +14,17 @@ import java.util.ArrayList;
  */
 public class Database {
 
-    DatabaseDAO DAO;
+    DatabaseDAO databaseDAO;
 
     /**
      * Sisältää metodeja, joilla käsitellään kyseisen kurssin/tietokannan
      * sisältöä.
      *
      * @param course kurssin/tietokannan nimi
-     * @throws SQLException
-     * @throws ClassNotFoundException
      */
-    public Database(String course) throws SQLException, ClassNotFoundException {
+    public Database(String course) {
         String check = course + ".db";
-        this.DAO = new DatabaseDAO(check);
+        this.databaseDAO = new DatabaseDAO(check);
     }
 
     /**
@@ -35,11 +32,10 @@ public class Database {
      *
      * @param term lisättävä termi
      * @param explanation selitys termille
-     * @return 1: termi on jo lisätty tietokantaan 2: termi ja selitys lisättiin
-     * tietokantaan 3: selityksen lisäyksessä tapahtui ongelma
+     * @return true: termin lisäys onnistui false: termin lisäys epäonnistui
      */
     public boolean addTerm(String term, String explanation) {
-        boolean addedTerm = DAO.addTerm(term, explanation);
+        boolean addedTerm = databaseDAO.addTerm(term, explanation);
         return addedTerm;
     }
 
@@ -47,11 +43,10 @@ public class Database {
      * Metodi poistaa termi/selitys parin kurssin tietokannasta
      *
      * @param term poistettava termi
-     * @return 1: termiä ei ole tietokannassa 2: termi ja selitys poistettu 3:
-     * ongelma poistossa.
+     * @return true: termin poisto onnistui false: termin poisto epäonnistui
      */
     public boolean removeTerm(String term) {
-        boolean removed = DAO.removeTerm(term);
+        boolean removed = databaseDAO.removeTerm(term);
         return removed;
     }
 
@@ -61,7 +56,7 @@ public class Database {
      * @return tietokannassa olevien termien lukumäärä
      */
     public int numberOfTerms() {
-        int amount = DAO.numberOfTerms();
+        int amount = databaseDAO.numberOfTerms();
         return amount;
     }
 
@@ -71,7 +66,7 @@ public class Database {
      * @return palauttaa ArrayList:an kaikista termeistä
      */
     public ArrayList<String> getTerms() {
-        ArrayList<String> listOfTerms = DAO.listTerms();
+        ArrayList<String> listOfTerms = databaseDAO.listTerms();
         return listOfTerms;
     }
 
@@ -82,12 +77,20 @@ public class Database {
      * selitys, tyhjä rivi)
      */
     public ArrayList<String> getTermsAndExplanations() {
-        ArrayList<String> toReturn = DAO.listTermsAndExplanations();
+        ArrayList<String> toReturn = databaseDAO.listTermsAndExplanations();
         return toReturn;
     }
 
+    /**
+     * Metodi palauttaa halutut termit tai selitykset tietokannasta
+     *
+     * @param termNumber lista haluttujen tekijöiden numeroista tietokannassa
+     * @param name - määritellään halutaanko termit vai selitykset (name=termit,
+     * explanation=selitykset)
+     * @return lista halutuista termeistä/selityksistä
+     */
     ArrayList<String> getTermsOrExplanations(ArrayList<Integer> termNumbers, String name) {
-        ArrayList<String> toReturn = DAO.listTermsOrExplanations(termNumbers, name);
+        ArrayList<String> toReturn = databaseDAO.listTermsOrExplanations(termNumbers, name);
         return toReturn;
     }
 

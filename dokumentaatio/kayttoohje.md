@@ -2,6 +2,11 @@
 
 Lataa tiedosto [kemianTestaaja-1.0-SNAPSHOT.jar](https://github.com/Deca89/ot-harjoitustyo/releases/tag/viikko6)
 
+## Käyttövaatimukset/oletukset
+
+Ohjelman olettaa, ettei sen käynnistyshakemistossa ole ohjelmaan kuulumattomia tietokantatiedostoja. Tai ettei niitä ainakaan yritetä avata ohjelmalla.
+
+Ohjelman testi olettaa, ettei testejä varten tehtyjä tiedostoja käytetä.
 
 ## Ohjelman käynnistäminen
 
@@ -53,8 +58,50 @@ Kurssin valitsemisen jälkeen avautuu uusi ikkuna/kurssivalikko.
 
 Kurssivalikon valikkoon päästää jälleen aina takaisin klikkaamalla Palaa valikkoon- nappia.
 
-Kurssivalikon sisällä olevat listää termi/selitys ja poista termi/selitys toimivat samalla tavalla kuin hallintavalikon vastaavat vaihtoehdot.
+------------------------------
 
-Tarkastele termejä napin avulla avautuu tarkasteltavaksi kaikki kurssin sisältämät termi/selitys parit.
+Tietokantaan voidaan lisätä termi/selitys klikkaamalla Lisää termi/selitys- nappia 
 
-Tee testi valikko ei vielä ole käytössä.
+![lisaatermiselitys.png](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/lisaatermiselitys.png)>
+
+Tietokantaan lisätään termi syöttämällä ylempään tekstiruutuun termi, alempaan tekstiruutuun selitys ja sitten painamalla Lisää termi-nappia.
+Napin painalluksen jälkeen napin alapuolelle tulostuu viesti, jossa kerrotaan onnistuiko termin lisäys. Huom! Sekä termin, että syötteen tulee aina olla uniikki.
+
+-------------------------------
+
+Tietokannasta voidaan poistaa termi/selitys klikkaamalla Poista termi/selitys- nappia
+
+![poistatermiselitys.png](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/poistatermiselitys.png)>
+
+Tietokannasta poistetaan termi painamalla termin nimen sisältämää nappia.
+
+-------------------------------
+
+Tietokannan termejä voidaan selata klikkaamalla Tarkastele termejä- nappia
+
+![tarkasteletermeja.png](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/tarkasteletermeja.png)>
+
+Ruutuun tulostuu lista kaikista tietokannan termeistä ja niiden selityksistä.
+
+-------------------------------
+
+Klikkaamalla Tee testi- nappia avataan uusi ikkuna, jossa testi toiminta.
+
+## Testivalikko
+
+Tee testi- napin painamisen jälkeen avautuu uusi ikkuna/testivalikko.
+
+![tenttivalikko.png](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/tenttivalikko.png)>
+
+Syöttämällä tekstiruutuun luku yhden ja max tekstiruudun oikealla puolella olevan luvun väliltä voidaan tehdä testi klikkaamalla Luo testi- nappia. Tenttivalikkoon päästään aina takaisin painamalla Palaa tentin alustukseen- nappia
+
+-------------------------------
+
+![tentti.png](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/tentti.png)>
+
+Luoto testi suoritetaan syöttämällä kunkin rivin tekstiruutuun numero, joka vastaa selityksen termiä. Esimerkki näkymässä oikeat syötteet ylhäältä alas olisivat: 1, 3, 2.
+Klikkaamalla Tarkista koe- nappia tulostuu tentti tulos.
+
+![tulos.png](https://github.com/Deca89/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/tulos.png)>
+
+

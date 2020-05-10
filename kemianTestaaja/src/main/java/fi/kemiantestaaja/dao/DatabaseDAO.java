@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Kurssin/tietokannan hallintaa
  *
  * @author Juuri
  */
@@ -23,10 +24,20 @@ public class DatabaseDAO {
 
     String course;
 
+    /**
+     * Luo hallintapohjan
+     *
+     * @param course tarkasteltava kurssi
+     */
     public DatabaseDAO(String course) {
         this.course = course;
     }
 
+    /**
+     * luo yhteyden tietokantaan
+     *
+     * @return yhteys
+     */
     public Connection createConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -38,6 +49,13 @@ public class DatabaseDAO {
         }
     }
 
+    /**
+     * lisää termi/selitys tietokantaan
+     *
+     * @param term termi
+     * @param explanation selitys
+     * @return true: lisäys onnistui false: lisäys epäonnistui
+     */
     public boolean addTerm(String term, String explanation) {
         try {
             int toReturn = 0;
@@ -53,6 +71,12 @@ public class DatabaseDAO {
         }
     }
 
+    /**
+     * poista termi tietokannasta
+     *
+     * @param term termin nimi
+     * @return true: termin poisto onnistui false: termin poisto epäonnisti
+     */
     public boolean removeTerm(String term) {
         try {
             Connection dM = createConnection();
@@ -71,6 +95,11 @@ public class DatabaseDAO {
         }
     }
 
+    /**
+     * Listaa kaikki termit tietokannassa
+     *
+     * @return lista termeistä, null jos termien haku epäonnistui
+     */
     public ArrayList<String> listTerms() {
         try {
             ArrayList<String> toReturn = new ArrayList<>();
@@ -89,6 +118,11 @@ public class DatabaseDAO {
         }
     }
 
+    /**
+     * listaa kaikki termit ja selitykset tietokannasta
+     *
+     * @return lista termeistä ja selityksistä, null jos haku epäonnistui
+     */
     public ArrayList<String> listTermsAndExplanations() {
         try {
             ArrayList<String> toReturn = new ArrayList<>();
@@ -109,6 +143,11 @@ public class DatabaseDAO {
         }
     }
 
+    /**
+     * Palauttaa termien lukumäärän tietokannassa
+     *
+     * @return termien lukumäärä tietokannassa (numerona)
+     */
     public int numberOfTerms() {
         try {
             Connection dM = createConnection();
@@ -121,9 +160,16 @@ public class DatabaseDAO {
         }
     }
 
+    /**
+     * Palauttaa listan halutuissta termeistä tai selityksistä
+     *
+     * @param wantedWords lista haluttujen asioiden id:stä
+     * @param wanted name - saadaan termit, explanation - saadaan selitykset
+     * @return lista halutuista termeistä/selityksistä
+     */
     public ArrayList<String> listTermsOrExplanations(ArrayList<Integer> wantedWords, String wanted) {
         ArrayList<String> wantedNames = new ArrayList<>();
-        
+
         for (int i = 0; i < wantedWords.size(); i++) {
             try {
                 Connection dM = createConnection();
@@ -135,7 +181,7 @@ public class DatabaseDAO {
                 return null;
             }
         }
-        
+
         return wantedNames;
     }
 

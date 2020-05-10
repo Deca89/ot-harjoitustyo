@@ -6,7 +6,6 @@
 package fi.kemiantestaaja.ui;
 
 import fi.kemiantestaaja.domain.CourseSelections;
-import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
+ * UI eri tiedostojen/tietokantojen hallintaa varten
  *
  * @author Juuri
  */
@@ -31,7 +31,7 @@ public class UIDatabaseChooserGraphic extends Application {
     CourseSelections courses = new CourseSelections();
 
     @Override
-    public void start(Stage window) throws IOException {
+    public void start(Stage window) {
         BorderPane layout = new BorderPane();
         Label lWelcome = new Label("Tervetuloa harjoitustyön maailmaan");
         Button returnToOptions = new Button("Palaa valikkoon");
@@ -41,6 +41,7 @@ public class UIDatabaseChooserGraphic extends Application {
         layout.setAlignment(lWelcome, Pos.CENTER);
         layout.setAlignment(returnToOptions, Pos.CENTER);
 
+        //Options view for program
         VBox options = new VBox();
         Button oCreateCourse = new Button("Luo kurssi");
         oCreateCourse.setPrefSize(400, 10);
@@ -52,10 +53,13 @@ public class UIDatabaseChooserGraphic extends Application {
         options.getChildren().add(oChooseCourse);
         options.getChildren().add(oRemoveCourse);
         options.setSpacing(10);
-        layout.setCenter(options);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(options);
+        layout.setCenter(scrollPane);
 
+        //Creating new courses/files for the program
         VBox createCourse = new VBox();
-        oCreateCourse.setOnAction((event) -> layout.setCenter(createCourse));
+        oCreateCourse.setOnAction((event) -> scrollPane.setContent(createCourse));
         TextField crCourseName = new TextField();
         Button crInsertCourse = new Button("Luo kurssi");
         Label crMessage = new Label("");
@@ -63,22 +67,26 @@ public class UIDatabaseChooserGraphic extends Application {
         createCourse.getChildren().add(crInsertCourse);
         createCourse.getChildren().add(crMessage);
         crInsertCourse.setOnAction((event) -> {
-            int added = courses.addCourse(crCourseName.getText());
-            if (added == 2) {
-                crMessage.setText("Kurssi lisätty");
-            } else if (added == 1) {
-                crMessage.setText("Kurssi on jo olemassa");
+            if (crCourseName.getText().equals("")) {
+                crMessage.setText("Tyhjä nimike ei kelpaa");
             } else {
-                crMessage.setText("Kurssin lisäyksessä tapahtui odottamaton ongelma, yritä uudestaan");
+                int added = courses.addCourse(crCourseName.getText());
+                if (added == 2) {
+                    crMessage.setText("Kurssi lisätty");
+                } else if (added == 1) {
+                    crMessage.setText("Kurssi on jo olemassa");
+                } else {
+                    crMessage.setText("Kurssin lisäyksessä tapahtui odottamaton ongelma, yritä uudestaan");
+                }
             }
+
         });
         createCourse.setSpacing(10);
 
+        //Opening a course/file
         oChooseCourse.setOnAction((event) -> {
             VBox chooseCourse = new VBox();
-            ScrollPane scrollPane = new ScrollPane();
             scrollPane.setContent(chooseCourse);
-            layout.setCenter(scrollPane);
             Label chChooseCouse = new Label("Valitse kurssi listalta:");
             chooseCourse.getChildren().add(chChooseCouse);
             List<String> listOfCourses = courses.listCourses();
@@ -88,10 +96,10 @@ public class UIDatabaseChooserGraphic extends Application {
                 chCourse.setOnAction((eventt) -> {
                     String courseToStartRaw = chCourse.getText();
                     String courseToStart = courseToStartRaw.substring(2, courseToStartRaw.length() - 3);
-                    UserInterfaceGraphic UIG = new UserInterfaceGraphic();
+                    UserInterfaceGraphic userIG = new UserInterfaceGraphic();
                     Stage newStage = new Stage();
                     try {
-                        UIG.start(newStage, courseToStart);
+                        userIG.start(newStage, courseToStart);
                     } catch (Exception ex) {
                         Logger.getLogger(UIDatabaseChooserGraphic.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -100,11 +108,10 @@ public class UIDatabaseChooserGraphic extends Application {
             chooseCourse.setSpacing(10);
         });
 
+        //Removing course/file from program(/computer..)
         oRemoveCourse.setOnAction((event) -> {
             VBox deleteCourse = new VBox();
-            ScrollPane scrollPane = new ScrollPane();
             scrollPane.setContent(deleteCourse);
-            layout.setCenter(scrollPane);
             Label dcChooseCouse = new Label("Valitse poistettava kurssi listalta:");
             deleteCourse.getChildren().add(dcChooseCouse);
             Label dcMessage = new Label("");
@@ -128,7 +135,7 @@ public class UIDatabaseChooserGraphic extends Application {
             deleteCourse.setSpacing(10);
         });
 
-        returnToOptions.setOnAction((event) -> layout.setCenter(options));
+        returnToOptions.setOnAction((event) -> scrollPane.setContent(options));
 
         layout.setPrefSize(500, 600);
         Scene primaryScene = new Scene(layout);

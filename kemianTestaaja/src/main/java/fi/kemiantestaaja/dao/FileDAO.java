@@ -14,17 +14,22 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- *
+ *Tiedostojen/kurssien hallintaa
  * @author Juuri
  */
 public class FileDAO {
 
+    /**
+     * Luo tiedoston/kurssin
+     *
+     * @param fileName kurssin/tiedoston nimi
+     * @return 1: kurssi jo olemassa 2: kurssin luonti onnistui 3: tapahtui
+     * odottamaton ongelma
+     */
     public Integer createFile(String fileName) {
         boolean fileExistsAlready = fileExists(fileName);
 
@@ -42,6 +47,12 @@ public class FileDAO {
 
     }
 
+    /**
+     * Tarkistaa onko kyseinen kurssi jo olemassa
+     *
+     * @param fileName kurssin nimi
+     * @return true: on olemassa false: ei ole olemassa
+     */
     public boolean fileExists(String fileName) {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -53,16 +64,27 @@ public class FileDAO {
         }
     }
 
+    /**
+     * Poistaa kyseisen kurssin
+     *
+     * @param fileName poistettavan kurssin nimi
+     * @return true: kurssi poistettu false: kurssia ei poistettu
+     */
     public boolean deleteFile(String fileName) {
         if (fileExists(fileName)) {
             String check = fileName + ".db";
             File file = new File(check);
             file.delete();
             return true;
-        } 
+        }
         return false;
     }
 
+    /**
+     * Listaa kurssit projektin juurikansiossa
+     *
+     * @return lista kursseista
+     */
     public List<String> listDBFiles() {
         try {
             Stream<Path> curDirFiles = Files.walk(Paths.get("."));

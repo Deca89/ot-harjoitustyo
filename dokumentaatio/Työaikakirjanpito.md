@@ -10,6 +10,7 @@ Lasken tähän työaikakirjanpito-dokumentin luomisesta lähtien projektiin käy
 |21.4  |7h              |Muokattu uusiksi projektia - yleistetty rakennetta ja mahdollistettu useampien kurssien materiaalin tallennus erillisiin tiedostoihin. Tehty perusversio testistä (yhdistä termi/selitys). Testien mielekkyyden ja kuvien lisäystä varten tarvitaan graafinen käyttöliittymä käyttöön. Tämä tärkeimpänä lähitulevaisuudessa.
 |28.4  | 8h             | Aloitettu graafisen käyttöliittymän luonti. Kaikki, paitsi testi funktio mukana. Itse testien suorituksessa ilmestynyt uusia ongelmia. Ensi viikoksi lisätään testi funktio, testi toiminnat, sekä mahdollisesti kuvien lisäys tietokantaan.
 |9.5   | 11 h           | Korjattu tunnetut ongelmat. Testi toiminto lisätty (ei täysin funktionaalinen vielä). Suoritettu ehdotetut korjaukset (assari ja vertaisarviointi).
+|10.5  | 11 h           | Korjattu löydetyt virheet. Laajennettu projektin testausta. Tehty dokumentaatio loppuun.
 
 
-Yhteensä käytetty aika: 35h
+Yhteensä käytetty aika: 46h
